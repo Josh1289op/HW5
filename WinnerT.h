@@ -30,19 +30,21 @@ public:
 	
 	void update_player(int player, int new_score){
 		int position = (size / 2 - 1) + player;
+		player = position;
 		bool updating = true;
-		tree[position] = new_score;
 		while (updating){
-			if (tree[position] <= tree[position / 2]){
+			if (tree[position] < tree[position / 2]){
 				//do nothing,
+				tree[position] = new_score;
 				updating = false;
 				std::cout << tree[position] << " " << tree[position / 2] << std::endl;
 			}
 			else{
+				tree[player] = new_score;
 				position = position / 2;
-				tree[position] = tree[position * 2] > tree[position * 2 + 1] ? tree[position * 2] : tree[position * 2 + 1];
-				std::cout << "UPDATING SCORE" << std::endl;
-				if (position == 1 ){
+				tree[position] = tree[position * 2] < tree[position dl;
+* 2 + 1] ? tree[position * 2] : tree[position * 2 + 1];
+				std::cout << "UPDATING SCORE" << std::en				if (position == 0 ){
 					updating = false;
 				}
 			}
@@ -55,8 +57,12 @@ public:
 		if (tree[position] < tree[position / 2]){
 			//do nothing
 			updating = false;
-
 		}
+		else{
+			std::cout << "UPDATING!!!" << std::endl;
+			update_player(player, NULL);
+		}
+
 		tree[position] = NULL;
 	}
 

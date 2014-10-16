@@ -10,8 +10,10 @@ int main(){
 
 	lol->pretty_print(std::cout);
 	std::cout << std::endl << std::endl << std::endl;
-	lol->update_player(2, 1);
-	lol->eliminate_player(2);
+	lol->update_player(4, 1);
+	lol->pretty_print(std::cout);
+	std::cout << std::endl << std::endl << std::endl;
+	lol->eliminate_player(4);
 	std::cout << std::endl << std::endl << std::endl;
 	lol->pretty_print(std::cout);
 	return 0; 
