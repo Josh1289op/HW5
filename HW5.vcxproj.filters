@@ -23,5 +23,8 @@
     <ClInclude Include="WinnerT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
