@@ -42,9 +42,9 @@ public:
 			else{
 				tree[player] = new_score;
 				position = position / 2;
-				tree[position] = tree[position * 2] < tree[position dl;
-* 2 + 1] ? tree[position * 2] : tree[position * 2 + 1];
-				std::cout << "UPDATING SCORE" << std::en				if (position == 0 ){
+				tree[position] = tree[position * 2] > tree[position* 2 + 1] ? tree[position * 2] : tree[position * 2 + 1];
+				std::cout << "UPDATING SCORE" << std::endl;
+				if (position == 0 ){
 					updating = false;
 				}
 			}
