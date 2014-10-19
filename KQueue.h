@@ -48,7 +48,7 @@ public:
 		return data;
 	}
 
-	bool isEmpty(){ size > 0 ? false : true;  }
+	bool isEmpty(){ return size > 0 ? false : true;  }
 
 
 

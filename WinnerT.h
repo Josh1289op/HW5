@@ -1,4 +1,5 @@
 #include <iostream>
+#include "KQueue.h"
 
 template <typename T>
 class WinnerT{ 
@@ -9,7 +10,6 @@ private:
 public:
 	WinnerT(T * scores, size_t players, char elim){
 		this->size = (players * 2);
-		std::cout << "SIZE: " << size << std::endl;
 		eliminate_player_sig = elim;
 		tree = new T[this->size + 1];
 		
@@ -68,20 +68,102 @@ public:
 	T winner(){ return tree[1]; }
 	int get_size(){ return (int)(size); }
 	bool empty(){ return size > 0 ? true : false; }
+	
+	
+	
 	void pretty_print(std::ostream&){
-		//fake print for now;
-		for (int i = 0; i < (int)size; ++i){
-			if (i == 1){
-				std::cout << "Winner: " << " " << tree[i] << std::endl;
+
+
+		int players = size / 2;
+		int tree_height = findHeight(players);
+		int start_matches = (int)pow(2, tree_height - 2);
+		std::cout << "TREE HEIGHT: " << tree_height << std::endl;
+		int height = ((players * 2) - 2) + 1;
+		int width = ((tree_height - 1) * 3) + 1;
+
+		std::cout << height << std::endl << std::endl;
+		KQueue<int>* ino = inorder();	
+
+		
+
+		for (int i = -1; i < height; ++i){
+			if (i == -1){
+				std::cout << " ";
 			}
-			else if (tree[i] == NULL){
-				std::cout << eliminate_player_sig << std::endl;
+			else{
+				std::cout << i;
 			}
-			else {
-				std::cout << tree[i] << std::endl;
+			for (int j = 0; j < width; ++j){
+				if (i == -1){ std::cout << j; }
+
+				if (i != -1){
+					if (!ino->isEmpty()){
+						if (i % 2 == 0)
+						{
+							if (j == width - 1){
+								std::cout << ino->dequeue();
+							}else{
+								std::cout << " ";
+							}
+						}
+						else{
+							if ((j == height - 4 && i != width/2) || (i == (players - 1) && j == 0)){
+								std::cout << ino->dequeue();
+							}
+							else{
+								std::cout << "-";
+							}
+						}
+					}
+				}
+
+
+				
 			}
+			std::cout << std::endl;
 		}
 
+
+
+
+
+
+
+	}
+
+
+private:
+
+	KQueue<int>* inorder(){
+		KQueue<int>* ino = new KQueue<int>;
+		inorder(*ino, 1);
+		return ino;
+	}
+
+	void inorder(KQueue<int>& ino, int position){
+
+		if (position * 2 < size){
+			inorder(ino, position * 2);
+		}
+
+		ino.enqueue(tree[position]);
+		std::cout << tree[position] << std::endl;
+		if (position * 2 + 1 < size){
+			inorder(ino, position * 2 + 1);
+		}
+
+
+
+	}
+
+
+
+	int findHeight(int size){
+		if (size == 0)
+			return 0;
+		else{
+			return 1 + findHeight(size / 2);
+		}
 	}
 
 
